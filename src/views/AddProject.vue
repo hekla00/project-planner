@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <label>Title:</label>
-    <input type="text" required />
-    <label>Details:</label>
+    <label>Title</label>
+    <input type="text" v-model="title" required />
+    <label>Details</label>
     <textarea v-model="details" required></textarea>
     <button>Add Project</button>
   </form>
@@ -22,15 +22,15 @@ export default {
         title: this.title,
         details: this.details,
         complete: false,
+        id: Math.floor(Math.random() * 10000),
       };
       console.log(project);
-      // this adds new project to the db.json file
+
       fetch("http://localhost:3000/projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(project),
       })
-        // here we are redirecting the user to the home page after they have submitted the new project
         .then(() => {
           this.$router.push("/");
         })
@@ -72,7 +72,7 @@ textarea {
 form button {
   display: block;
   margin: 20px auto 0;
-  background: #27d39a;
+  background: #00ce89;
   color: white;
   padding: 10px;
   border: 0;
